@@ -91,6 +91,7 @@ private:
     InterruptibleReader eventReader;
     std::thread eventThread;
 
+    uinput_user_dev setup = {};
     ff_effect effect = {};
     uint16_t effectGain = 0xffff;
     FeedbackReceived feedbackReceived;

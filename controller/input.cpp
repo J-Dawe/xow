@@ -73,6 +73,7 @@ void InputDevice::addAxis(uint16_t code, AxisConfig config)
         throw InputException("Error adding axis code");
     }
 
+/*
     uinput_abs_setup setup = {};
 
     setup.code = code;
@@ -85,6 +86,11 @@ void InputDevice::addAxis(uint16_t code, AxisConfig config)
     {
         throw InputException("Error setting up axis");
     }
+*/
+    setup.absmax[code] = config.maximum;
+    setup.absmin[code] = config.minimum;
+    setup.absfuzz[code] = config.fuzz;
+    setup.absflat[code] = config.flat;
 }
 
 void InputDevice::addFeedback(uint16_t code)
@@ -99,7 +105,7 @@ void InputDevice::addFeedback(uint16_t code)
 
 void InputDevice::create(std::string name, DeviceConfig config)
 {
-    uinput_setup setup = {};
+//    uinput_setup setup = {};
 
     setup.id.bustype = BUS_USB;
     setup.id.vendor = config.vendorId;
@@ -109,8 +115,17 @@ void InputDevice::create(std::string name, DeviceConfig config)
 
     std::copy(name.begin(), name.end(), std::begin(setup.name));
 
+    write(file, &setup, sizeof(setup));
+
+/*
     if (
         ioctl(file, UI_DEV_SETUP, &setup) < 0 ||
+        ioctl(file, UI_DEV_CREATE) < 0
+    ) {
+        throw InputException("Error creating device");
+    }
+*/
+    if (
         ioctl(file, UI_DEV_CREATE) < 0
     ) {
         throw InputException("Error creating device");
