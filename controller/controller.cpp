@@ -137,10 +137,10 @@ void Controller::inputReceived(const InputData *input)
     inputDevice.setKey(BTN_THUMBL, input->buttons.stickLeft);
     inputDevice.setKey(BTN_THUMBR, input->buttons.stickRight);
     inputDevice.setAxis(ABS_X, input->stickLeftX);
-    inputDevice.setAxis(ABS_RX, input->stickRightX);
-    inputDevice.setAxis(ABS_Y, ~input->stickLeftY);
-    inputDevice.setAxis(ABS_RY, ~input->stickRightY);
-    inputDevice.setAxis(ABS_Z, input->triggerLeft);
+    inputDevice.setAxis(ABS_Y, input->stickLeftY);
+    inputDevice.setAxis(ABS_Z, input->stickRightX);
+    inputDevice.setAxis(ABS_RX, input->stickRightY);
+    inputDevice.setAxis(ABS_RY, input->triggerLeft);
     inputDevice.setAxis(ABS_RZ, input->triggerRight);
     inputDevice.setAxis(
         ABS_HAT0X,
@@ -217,10 +217,10 @@ void Controller::initInput(const AnnounceData *announce)
     inputDevice.addKey(BTN_THUMBL);
     inputDevice.addKey(BTN_THUMBR);
     inputDevice.addAxis(ABS_X, stickConfig);
-    inputDevice.addAxis(ABS_RX, stickConfig);
     inputDevice.addAxis(ABS_Y, stickConfig);
-    inputDevice.addAxis(ABS_RY, stickConfig);
-    inputDevice.addAxis(ABS_Z, triggerConfig);
+    inputDevice.addAxis(ABS_Z, stickConfig);
+    inputDevice.addAxis(ABS_RX, stickConfig);
+    inputDevice.addAxis(ABS_RY, triggerConfig);
     inputDevice.addAxis(ABS_RZ, triggerConfig);
     inputDevice.addAxis(ABS_HAT0X, dpadConfig);
     inputDevice.addAxis(ABS_HAT0Y, dpadConfig);
