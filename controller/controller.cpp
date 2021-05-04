@@ -137,9 +137,9 @@ void Controller::inputReceived(const InputData *input)
     inputDevice.setKey(BTN_THUMBL, input->buttons.stickLeft);
     inputDevice.setKey(BTN_THUMBR, input->buttons.stickRight);
     inputDevice.setAxis(ABS_X, input->stickLeftX);
-    inputDevice.setAxis(ABS_Y, input->stickLeftY);
+    inputDevice.setAxis(ABS_Y, ~input->stickLeftY);
     inputDevice.setAxis(ABS_Z, input->stickRightX);
-    inputDevice.setAxis(ABS_RX, input->stickRightY);
+    inputDevice.setAxis(ABS_RX, ~input->stickRightY);
     inputDevice.setAxis(ABS_RY, input->triggerLeft);
     inputDevice.setAxis(ABS_RZ, input->triggerRight);
     inputDevice.setAxis(
